@@ -253,6 +253,13 @@ export const uploadProps = buildProps({
     type: definePropType<UploadHooks['onExceed']>(Function),
     default: NOOP,
   },
+  /**
+   * @description 是否开启粘贴上传
+   */
+  paste: {
+    type: Boolean,
+    default: false,
+  },
 } as const)
 
 export type UploadProps = ExtractPropTypes<typeof uploadProps>

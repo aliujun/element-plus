@@ -14,6 +14,9 @@
       <template #append>
         <upload-content ref="uploadRef" v-bind="uploadContentProps">
           <slot v-if="$slots.trigger" name="trigger" />
+          <template v-if="$slots.paste" #paste>
+            <slot name="paste" />
+          </template>
           <slot v-if="!$slots.trigger && $slots.default" />
         </upload-content>
       </template>
@@ -25,6 +28,9 @@
       v-bind="uploadContentProps"
     >
       <slot v-if="$slots.trigger" name="trigger" />
+      <template v-if="$slots.paste" #paste>
+        <slot name="paste" />
+      </template>
       <slot v-if="!$slots.trigger && $slots.default" />
     </upload-content>
 

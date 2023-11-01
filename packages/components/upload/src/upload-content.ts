@@ -51,6 +51,10 @@ export const uploadContentProps = buildProps({
     type: definePropType<UploadHooks['onExceed']>(Function),
     default: NOOP,
   },
+  paste: {
+    type: Boolean,
+    default: false,
+  },
 } as const)
 
 export type UploadContentProps = ExtractPropTypes<typeof uploadContentProps>

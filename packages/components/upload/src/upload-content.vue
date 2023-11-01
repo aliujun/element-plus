@@ -5,10 +5,21 @@
     @click="handleClick"
     @keydown.self.enter.space="handleKeydown"
   >
-    <template v-if="drag">
-      <upload-dragger :disabled="disabled" @file="uploadFiles">
-        <slot />
-      </upload-dragger>
+    <template v-if="drag || paste">
+      <template
+        v-if="!disabled && drag && (limit ? fileList.length <= limit : true)"
+      >
+        <upload-dragger :disabled="disabled" @file="uploadFiles">
+          <slot />
+        </upload-dragger>
+      </template>
+      <template
+        v-if="!disabled && paste && (limit ? fileList.length <= limit : true)"
+      >
+        <upload-paste :disabled="disabled" @file="uploadFiles">
+          <slot name="paste" />
+        </upload-paste>
+      </template>
     </template>
     <template v-else>
       <slot />
@@ -34,6 +45,7 @@ import { useNamespace } from '@element-plus/hooks'
 import { entriesOf, isFunction } from '@element-plus/utils'
 import { useFormDisabled } from '@element-plus/components/form'
 import UploadDragger from './upload-dragger.vue'
+import UploadPaste from './upload-paste.vue'
 import { uploadContentProps } from './upload-content'
 import { genFileId } from './upload'
 import type { UploadContentProps } from './upload-content'
